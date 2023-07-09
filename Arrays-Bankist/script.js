@@ -194,6 +194,26 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const loanAmount = Number(inputLoanAmount.value);
+
+  if (
+    loanAmount > 0 &&
+    currentAccount.movements.some(mov => mov >= loanAmount * 0.1)
+  ) {
+    //Add movement
+    currentAccount.movements.push(loanAmount);
+
+    //update ui
+    updateUI(currentAccount);
+
+    inputLoanAmount.value = '';
+    inputLoanAmount.blur();
+  }
+});
+
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -217,6 +237,7 @@ btnClose.addEventListener('click', function (e) {
   inputClosePin.blur();
 });
 
+///////////////////////////////////////////////////////////////////
 //console.log(accounts);
 
 // const username = user
@@ -566,3 +587,32 @@ GOOD LUCK 😀
 // const account = accounts.filter(acc => acc.owner === 'Jessica Davis');
 
 // console.log(account);
+
+//////////////////////////////////////////////////////////////////
+
+//const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// // // INCLUDES METHOD
+// //checks for equality
+// console.log(movements.includes(-130));
+
+// // // SOME METHOD
+// //checks for a condition
+
+// console.log(movements.some(mov => mov === -130));
+// console.log(movements.some(mov => mov > 1500));
+
+// // // EVERY METHOD
+// //checks for a condition
+// console.log(movements.every(mov=>mov>0));//false
+// console.log(account4.movements.every(mov=>mov>0));//true
+
+///////////////////////////////////////////////////////////////////
+
+// // // SEPERATE CALLBACK
+// const deposit = mov => mov > 0;
+// console.log(movements.some(deposit));
+// console.log(movements.every(deposit));
+// console.log(movements.filter(deposit));
+
+///////////////////////////////////////////////////////////////////
